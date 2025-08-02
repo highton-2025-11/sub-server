@@ -8,8 +8,5 @@ export class GetMyInfoRequest {
 
 export class GetMyInfoResponse {
   @ApiProperty()
-  ok: boolean;
-
-  @ApiProperty()
   user?: Member;
 }

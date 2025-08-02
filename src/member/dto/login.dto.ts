@@ -10,8 +10,5 @@ export class LoginRequest {
 
 export class LoginResponse {
   @ApiProperty()
-  ok: boolean;
-
-  @ApiProperty()
   user?: Member;
 }

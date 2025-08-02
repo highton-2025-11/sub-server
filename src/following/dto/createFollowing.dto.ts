@@ -8,7 +8,4 @@ export class CreateFollowingRequest {
   to: string;
 }
 
-export class CreateFollowingResponse {
-  @ApiProperty()
-  ok: boolean;
-}
+export class CreateFollowingResponse {}

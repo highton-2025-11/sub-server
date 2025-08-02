@@ -9,9 +9,7 @@ export class FollowingController {
 
   @Post('/create')
   @ApiCreatedResponse({ type: CreateFollowingResponse })
-  createFollowing(
-    @Body() req: CreateFollowingRequest,
-  ): Promise<CreateFollowingResponse> {
+  createFollowing(@Body() req: CreateFollowingRequest) {
     return this.followService.createFollowing(req);
   }
 }

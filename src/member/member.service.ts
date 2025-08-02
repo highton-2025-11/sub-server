@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { LoginRequest, LoginResponse } from './dto/login.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Member } from './entities/member.entity';
@@ -14,9 +14,13 @@ export class MemberService {
 
   async login(req: LoginRequest): Promise<LoginResponse> {
     if (req == null || req.username == null || req.password == null) {
-      return {
-        ok: false,
-      };
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_REQUEST,
+          error: 'Invalid Body',
+        },
+        HttpStatus.BAD_REQUEST,
+      );
     }
     const user = await this.members.findOne({
       where: {
@@ -26,30 +30,40 @@ export class MemberService {
       relations: ['followings'],
     });
     if (user == null) {
-      return {
-        ok: false,
-      };
+      throw new HttpException(
+        {
+          status: HttpStatus.NOT_FOUND,
+          error: 'User not found',
+        },
+        HttpStatus.NOT_FOUND,
+      );
     }
     return {
-      ok: true,
       user,
     };
   }
 
   async getMyInfo(req: GetMyInfoRequest): Promise<GetMyInfoResponse> {
     if (req == null || req.userId == null) {
-      return {
-        ok: false,
-      };
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_REQUEST,
+          error: 'Invalid Body',
+        },
+        HttpStatus.BAD_REQUEST,
+      );
     }
     const user = await this.members.findOne({ where: { id: req.userId }, relations: ['followings'] });
     if (user == null) {
-      return {
-        ok: false,
-      };
+      throw new HttpException(
+        {
+          status: HttpStatus.NOT_FOUND,
+          error: 'User not found',
+        },
+        HttpStatus.NOT_FOUND,
+      );
     }
     return {
-      ok: true,
       user,
     };
   }
