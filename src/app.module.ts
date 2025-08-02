@@ -2,10 +2,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as Joi from 'joi';
-import { Message } from './message/entities/message.entity';
 import { Member } from './member/entities/member.entity';
 import { MemberModule } from './member/member.module';
-import { MessageModule } from './message/message.module';
 import { TestModule } from './test/test.module';
 
 @Module({
@@ -34,11 +32,10 @@ import { TestModule } from './test/test.module';
       database: process.env.DB_NAME,
       synchronize: process.env.NODE_ENV !== 'prod',
       logging: process.env.NODE_ENV === 'dev',
-      entities: [Member, Message],
+      entities: [Member],
     }),
     MemberModule,
-    MessageModule,
-    TestModule
+    TestModule,
   ],
   controllers: [],
   providers: [],

@@ -1,12 +1,15 @@
 import { Controller, Get } from '@nestjs/common';
 import { TestService } from './test.service';
+import { StatusResponse } from './dto/status.dto';
+import { ApiCreatedResponse } from '@nestjs/swagger';
 
 @Controller('test')
 export class TestController {
   constructor(private readonly testService: TestService) {}
 
   @Get()
-  getHello(): string {
-    return this.testService.getHello();
+  @ApiCreatedResponse({ type: StatusResponse })
+  getStatus(): StatusResponse {
+    return this.testService.getStatus();
   }
 }
