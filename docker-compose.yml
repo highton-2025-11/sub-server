@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  nest:
+    build:
+      context: .          # 현재 디렉토리에서 Dockerfile 사용
+      dockerfile: Dockerfile
+    container_name: nest-server
+    ports:
+      - "3001:3001"       # 호스트:컨테이너
+    env_file:
+      - .env.prod              # 환경변수 파일 (있을 경우)
+    restart: unless-stopped
