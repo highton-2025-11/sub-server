@@ -3,6 +3,7 @@ import { LoginRequest, LoginResponse } from './dto/login.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Member } from './entities/member.entity';
 import { Repository } from 'typeorm';
+import { GetMyInfoRequest, GetMyInfoResponse } from './dto/getMyInfo.dto';
 
 @Injectable()
 export class MemberService {
@@ -24,6 +25,24 @@ export class MemberService {
       },
       relations: ['followings'],
     });
+    if (user == null) {
+      return {
+        ok: false,
+      };
+    }
+    return {
+      ok: true,
+      user,
+    };
+  }
+
+  async getMyInfo(req: GetMyInfoRequest): Promise<GetMyInfoResponse> {
+    if (req == null || req.userId == null) {
+      return {
+        ok: false,
+      };
+    }
+    const user = await this.members.findOne({ where: { id: req.userId }, relations: ['followings'] });
     if (user == null) {
       return {
         ok: false,
