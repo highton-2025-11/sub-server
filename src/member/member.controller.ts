@@ -7,7 +7,7 @@ import { ApiCreatedResponse } from '@nestjs/swagger';
 export class MemberController {
   constructor(private readonly memberService: MemberService) {}
 
-  @Post()
+  @Post('/login')
   @ApiCreatedResponse({ type: LoginResponse })
   login(@Body() req: LoginRequest): Promise<LoginResponse> {
     return this.memberService.login(req);

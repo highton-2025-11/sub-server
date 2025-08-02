@@ -12,7 +12,7 @@ export class MemberService {
   ) {}
 
   async login(req: LoginRequest): Promise<LoginResponse> {
-    if (req.username == null || req.password == null) {
+    if (req == null || req.username == null || req.password == null) {
       return {
         ok: false,
       };
@@ -22,6 +22,7 @@ export class MemberService {
         username: req.username,
         password: req.password,
       },
+      relations: ['followings'],
     });
     if (user == null) {
       return {
