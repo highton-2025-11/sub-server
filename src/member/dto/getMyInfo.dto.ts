@@ -5,8 +5,3 @@ export class GetMyInfoRequest {
   @ApiProperty()
   userId: number;
 }
-
-export class GetMyInfoResponse {
-  @ApiProperty()
-  user?: Member;
-}

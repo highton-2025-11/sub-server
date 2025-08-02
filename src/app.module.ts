@@ -5,8 +5,6 @@ import * as Joi from 'joi';
 import { Member } from './member/entities/member.entity';
 import { MemberModule } from './member/member.module';
 import { TestModule } from './test/test.module';
-import { FollowingModule } from './following/following.module';
-import { Following } from './following/entities/following.entity';
 
 @Module({
   imports: [
@@ -34,11 +32,10 @@ import { Following } from './following/entities/following.entity';
       database: process.env.DB_NAME,
       synchronize: process.env.NODE_ENV !== 'prod',
       logging: process.env.NODE_ENV === 'dev',
-      entities: [Member, Following],
+      entities: [Member],
     }),
     MemberModule,
     TestModule,
-    FollowingModule,
   ],
   controllers: [],
   providers: [],

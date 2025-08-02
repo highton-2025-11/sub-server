@@ -7,8 +7,3 @@ export class LoginRequest {
   @ApiProperty({ example: '1234' })
   password: string;
 }
-
-export class LoginResponse {
-  @ApiProperty()
-  user?: Member;
-}
